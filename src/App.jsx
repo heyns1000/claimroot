@@ -29,24 +29,28 @@ function App() {
     // Initialize FAA Cloud
     await faaCloud.initialize();
 
-    // Register initial member
-    claimRoot.registerMember('VAULT-COMMANDER-001', {
-      name: 'Heyns Schoeman',
-      role: 'VaultCommander',
-      votingPower: 10000,
-      vaultLevel: 7
-    });
+    // Register initial member (check if not already registered)
+    if (!claimRoot.getMember('VAULT-COMMANDER-001')) {
+      claimRoot.registerMember('VAULT-COMMANDER-001', {
+        name: 'Heyns Schoeman',
+        role: 'VaultCommander',
+        votingPower: 10000,
+        vaultLevel: 7
+      });
+    }
 
-    // Create initial seed scroll
-    const scroll = seedScrolls.createScroll({
-      type: 'UNDEVOTED_CAPITAL',
-      issuer: 'Heyns Schoeman',
-      vaultCommander: 'Heyns Schoeman',
-      agent: 'FREEDOM',
-      seedCapital: 50000,
-      currency: 'USD',
-      vaultLevel: 7
-    });
+    // Create initial seed scroll (check if not already created)
+    if (seedScrolls.getAllScrolls().length === 0) {
+      seedScrolls.createScroll({
+        type: 'UNDEVOTED_CAPITAL',
+        issuer: 'Heyns Schoeman',
+        vaultCommander: 'Heyns Schoeman',
+        agent: 'FREEDOM',
+        seedCapital: 50000,
+        currency: 'USD',
+        vaultLevel: 7
+      });
+    }
 
     // Update stats
     updateStats();
