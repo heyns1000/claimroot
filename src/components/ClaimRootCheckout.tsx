@@ -45,7 +45,7 @@ const ClaimRootCheckout = ({ action, onComplete, onCancel }) => {
     await new Promise(resolve => setTimeout(resolve, 2000));
     
     const receipt = {
-      receiptId: `VL7-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      receiptId: `VL7-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`,
       action: action,
       vaultLevel: formData.vaultLevel,
       timestamp: Date.now(),

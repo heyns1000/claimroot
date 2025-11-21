@@ -39,7 +39,9 @@ class VaultChain {
 
   calculateHash(index, timestamp, transactions, previousHash) {
     const data = `${index}${timestamp}${JSON.stringify(transactions)}${previousHash}`;
-    // Simple hash function (in production, use proper cryptographic hash)
+    // Simple hash function for demonstration purposes
+    // SECURITY NOTE: In production, use a cryptographic hash function like SHA-256
+    // for secure, collision-resistant hashing
     let hash = 0;
     for (let i = 0; i < data.length; i++) {
       const char = data.charCodeAt(i);
@@ -66,7 +68,7 @@ class VaultChain {
   }
 
   generateTransactionId() {
-    return `TX-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    return `TX-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
   }
 
   minePendingTransactions(minerAddress) {
@@ -94,7 +96,7 @@ class VaultChain {
 
   createVaultLevel7Receipt(transaction) {
     return {
-      receiptId: `VL7-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      receiptId: `VL7-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`,
       vaultLevel: 7,
       levelName: this.vaultLevels[7],
       transaction: transaction,
