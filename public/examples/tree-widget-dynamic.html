@@ -46,17 +46,27 @@
         iframe.title = 'Tree Counter';
         
         // Loading indicator
-        container.innerHTML = '<p style="text-align: center; color: #718096;">Loading tree counter...</p>';
+        const loadingMsg = document.createElement('p');
+        loadingMsg.style.textAlign = 'center';
+        loadingMsg.style.color = '#718096';
+        loadingMsg.textContent = 'Loading tree counter...';
+        loadingMsg.dataset.loading = 'true';
+        container.appendChild(loadingMsg);
         
         // Add iframe when ready
         iframe.onload = () => {
-            container.innerHTML = '';
+            const loader = container.querySelector('[data-loading="true"]');
+            if (loader) {
+                container.removeChild(loader);
+            }
             container.appendChild(iframe);
         };
         
         // Fallback after 5 seconds
         setTimeout(() => {
-            if (container.innerHTML.includes('Loading')) {
+            const loader = container.querySelector('[data-loading="true"]');
+            if (loader) {
+                container.removeChild(loader);
                 container.appendChild(iframe);
             }
         }, 5000);

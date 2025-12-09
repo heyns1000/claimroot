@@ -8,7 +8,12 @@ export function TreeCounter({ widgetUrl, maxWidth = '400px', height = '300px' })
         const iframe = iframeRef.current;
         if (iframe && widgetUrl) {
             iframe.src = widgetUrl;
-            iframe.onload = () => setIsLoading(false);
+            const handleLoad = () => setIsLoading(false);
+            iframe.onload = handleLoad;
+            
+            return () => {
+                iframe.onload = null;
+            };
         }
     }, [widgetUrl]);
 
