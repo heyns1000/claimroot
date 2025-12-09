@@ -4,6 +4,7 @@
 
 import React from 'react';
 import { TrendingUp, Users, Vote, FileText, Shield } from 'lucide-react';
+import { TreeCounter } from './TreeCounter';
 
 const Dashboard = ({ stats }) => {
   const cards = [
@@ -131,6 +132,33 @@ const Dashboard = ({ stats }) => {
             <div className="text-gray-400 text-sm">Execution Delay</div>
             <div className="text-white text-lg font-semibold">24 hours</div>
           </div>
+        </div>
+      </div>
+
+      {/* Planetary Health Tracker */}
+      <div className="bg-gray-800 rounded-lg p-6 border border-gray-700">
+        <h2 className="text-xl font-semibold text-white mb-4">🌍 Planetary Health Tracker</h2>
+        <p className="text-gray-400 mb-4">Our contribution to global reforestation:</p>
+        <div className="flex justify-center">
+          <TreeCounter 
+            widgetUrl="https://widgets.plant-for-the-planet.org/YOUR_WIDGET_URL"
+            maxWidth="400px"
+            height="300px"
+          />
+        </div>
+        <div className="mt-4 p-4 bg-gray-700 rounded-lg">
+          <p className="text-sm text-gray-300">
+            <strong>Note:</strong> To activate this widget, register at{' '}
+            <a 
+              href="https://widgets.plant-for-the-planet.org" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-green-400 hover:text-green-300"
+            >
+              widgets.plant-for-the-planet.org
+            </a>
+            {' '}and replace YOUR_WIDGET_URL with your generated URL.
+          </p>
         </div>
       </div>
     </div>

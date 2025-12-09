@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Tree Widget - ClaimRoot</title>
+    <style>
+        #tree-counter {
+            max-width: 400px;
+            margin: 20px auto;
+        }
+        body {
+            font-family: system-ui, sans-serif;
+            padding: 20px;
+            background: #f7fafc;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌱 Fruitful Global Planet Tree Tracker</h1>
+        <p>Live updates every second</p>
+    </div>
+
+    <div id="tree-counter"></div>
+
+    <script>
+    async function loadTreeWidget() {
+        // Replace with your actual widget URL
+        const widgetUrl = 'https://widgets.plant-for-the-planet.org/YOUR_WIDGET_URL';
+        const container = document.getElementById('tree-counter');
+        
+        // Create iframe dynamically
+        const iframe = document.createElement('iframe');
+        iframe.src = widgetUrl;
+        iframe.style.width = '100%';
+        iframe.style.height = '300px';
+        iframe.style.border = 'none';
+        iframe.style.borderRadius = '8px';
+        iframe.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+        iframe.frameBorder = '0';
+        iframe.title = 'Tree Counter';
+        
+        // Loading indicator
+        container.innerHTML = '<p style="text-align: center; color: #718096;">Loading tree counter...</p>';
+        
+        // Add iframe when ready
+        iframe.onload = () => {
+            container.innerHTML = '';
+            container.appendChild(iframe);
+        };
+        
+        // Fallback after 5 seconds
+        setTimeout(() => {
+            if (container.innerHTML.includes('Loading')) {
+                container.appendChild(iframe);
+            }
+        }, 5000);
+    }
+
+    // Load on page ready
+    document.addEventListener('DOMContentLoaded', loadTreeWidget);
+    </script>
+</body>
+</html>
